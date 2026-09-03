@@ -1,0 +1,338 @@
+/* ==========================================================================
+   Thème "GamingStore" — violet sombre + cyan/rose néon, police Poppins.
+   Variables CSS centralisées pour rester facile à modifier.
+   ========================================================================== */
+:root {
+  --bg-dark: #0d0a1a;
+  --bg-darker: #070512;
+  --bg-card: #171233;
+  --purple: #6d28d9;
+  --purple-light: #8b5cf6;
+  --cyan: #22d3ee;
+  --pink: #ec4899;
+  --text-light: #e9e6f7;
+  --text-muted: #c3bce3;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-light);
+}
+
+::selection { background: var(--pink); color: #fff; }
+
+/* Scrollbar moderne */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-darker); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--purple), var(--cyan));
+  border-radius: 10px;
+}
+
+a { text-decoration: none; }
+
+/* Bootstrap's default .text-muted is a light-background gray and becomes
+   almost invisible on our dark theme. We override it here (client side
+   only — the admin back-office keeps Bootstrap's default since it runs
+   in light mode, see body.admin-body further down). */
+body:not(.admin-body) .text-muted {
+  color: var(--text-muted) !important;
+}
+body:not(.admin-body) small,
+body:not(.admin-body) .small {
+  color: var(--text-muted);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--cyan), var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* -------------------------------- Navbar -------------------------------- */
+.navbar-gaming {
+  background: rgba(13, 10, 26, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.25);
+  transition: background 0.3s ease;
+}
+
+.navbar-gaming .nav-link {
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: color 0.25s ease;
+}
+
+.navbar-gaming .nav-link:hover,
+.navbar-gaming .nav-link.active {
+  color: var(--cyan);
+}
+
+.navbar-gaming .navbar-brand {
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+
+.search-form input {
+  background: var(--bg-card);
+  border: 1px solid rgba(139, 92, 246, .4);
+  color: var(--text-light);
+}
+.search-form input:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 .2rem rgba(34, 211, 238, .25);
+  background: var(--bg-card);
+  color: var(--text-light);
+}
+.search-form input::placeholder,
+.search-form textarea::placeholder {
+  color: var(--text-muted);
+  opacity: .75;
+}
+
+/* -------------------------------- Boutons -------------------------------- */
+.btn-neon {
+  background: linear-gradient(90deg, var(--purple), var(--pink));
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: .55rem 1.4rem;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn-neon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(236, 72, 153, .45);
+  color: #fff;
+}
+
+.btn-outline-neon {
+  border: 1.5px solid var(--cyan);
+  color: var(--cyan);
+  border-radius: 999px;
+  font-weight: 600;
+  transition: all .2s ease;
+  background: transparent;
+}
+.btn-outline-neon:hover {
+  background: var(--cyan);
+  color: var(--bg-dark);
+}
+
+/* -------------------------------- Hero video -------------------------------- */
+.hero-video-wrapper {
+  position: relative;
+  height: 78vh;
+  min-height: 420px;
+  overflow: hidden;
+}
+.hero-video-wrapper video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(.55) saturate(1.1);
+}
+.hero-video-overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(13,10,26,.15) 0%, rgba(13,10,26,.85) 100%);
+  padding: 0 1rem;
+}
+.hero-video-overlay h1 {
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+/* -------------------------------- Intro + carousel -------------------------------- */
+.intro-carousel-img {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  transition: opacity 1s ease;
+}
+.intro-carousel-img.active { opacity: 1; }
+.intro-carousel-frame {
+  position: relative;
+  min-height: 320px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(109, 40, 217, .35);
+}
+
+/* -------------------------------- Cards produits -------------------------------- */
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(139, 92, 246, .25);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  height: 100%;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--cyan);
+  box-shadow: 0 12px 30px rgba(34, 211, 238, .18);
+}
+.product-card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+.product-card .card-body { padding: 1.1rem; }
+.product-card .price {
+  color: var(--cyan);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+.product-card .badge-outofstock {
+  background: rgba(236, 72, 153, .15);
+  color: var(--pink);
+  border: 1px solid var(--pink);
+}
+
+/* -------------------------------- Overlay produit (card 2x agrandie) -------------------------------- */
+.product-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 3, 12, .88);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  padding: 1rem;
+}
+.product-overlay.open { display: flex; }
+
+.product-overlay-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(139, 92, 246, .4);
+  border-radius: var(--radius);
+  width: min(1000px, 95vw);
+  max-height: 90vh;
+  overflow: hidden auto;
+  display: flex;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+.product-overlay-card .overlay-img {
+  flex: 0 0 45%;
+  min-height: 320px;
+  object-fit: cover;
+}
+.product-overlay-card .overlay-body {
+  flex: 1;
+  padding: 2rem;
+}
+.overlay-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: background .2s ease;
+}
+.overlay-close:hover { background: var(--pink); }
+
+@media (max-width: 767px) {
+  .product-overlay-card { flex-direction: column; }
+  .product-overlay-card .overlay-img { flex: 0 0 220px; width: 100%; }
+}
+
+/* -------------------------------- Sections génériques -------------------------------- */
+.section-title {
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -10px;
+  width: 60px; height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--cyan), var(--pink));
+}
+
+section { padding: 4.5rem 0; }
+
+.about-photo {
+  width: 100%;
+  border-radius: var(--radius);
+  object-fit: cover;
+  aspect-ratio: 1/1;
+}
+
+/* -------------------------------- Footer -------------------------------- */
+footer.site-footer {
+  background: var(--bg-darker);
+  border-top: 1px solid rgba(139, 92, 246, .2);
+  padding: 1.6rem 0;
+  color: var(--text-muted);
+}
+
+/* -------------------------------- Admin (mode clair) -------------------------------- */
+body.admin-body {
+  background: #f4f5fa;
+  color: #1f2430;
+  font-family: 'Poppins', sans-serif;
+}
+.admin-sidebar {
+  background: #ffffff;
+  border-right: 1px solid #e6e8f0;
+  min-height: 100vh;
+}
+.admin-sidebar .nav-link {
+  color: #4b5165;
+  border-radius: 8px;
+  margin-bottom: .25rem;
+  font-weight: 500;
+}
+.admin-sidebar .nav-link.active,
+.admin-sidebar .nav-link:hover {
+  background: #eef0ff;
+  color: var(--purple);
+}
+.admin-card {
+  background: #fff;
+  border: 1px solid #e6e8f0;
+  border-radius: 12px;
+}
+.stat-card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e6e8f0;
+  padding: 1.3rem;
+}
+.stat-card .stat-value { font-size: 1.8rem; font-weight: 700; color: var(--purple); }
