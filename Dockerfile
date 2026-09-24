@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 
 # ---- Étape 2 : image finale PHP + Nginx + PHP-FPM ----
-FROM richarvey/nginx-php-fpm:php82
+FROM richarvey/nginx-php-fpm:latest
 
 # Variables Laravel utiles à l'image (voir doc de l'image de base)
 ENV SKIP_COMPOSER=1
