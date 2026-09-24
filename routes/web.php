@@ -67,3 +67,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::get('/commandes', [AdminOrderController::class, 'index'])->name('orders.index');
 });
+Route::get('/fix-storage', function () {
+    Artisan::call('storage:link');
+    return 'Le lien symbolique a été créé avec succès !';
+});
+
